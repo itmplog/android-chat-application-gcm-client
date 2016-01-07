@@ -2,10 +2,16 @@ package learn2crack.chat;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +36,7 @@ import java.util.List;
 public class UserFragment extends Fragment {
     ListView list;
     ArrayList<HashMap<String, String>> users = new ArrayList<HashMap<String, String>>();
-    Button refresh,logout;
+    Button refresh,logout,chat;
     List<NameValuePair> params;
     SharedPreferences prefs;
 
@@ -43,6 +49,32 @@ public class UserFragment extends Fragment {
         list = (ListView)view.findViewById(R.id.listView);
         refresh = (Button)view.findViewById(R.id.refresh);
         logout = (Button)view.findViewById(R.id.logout);
+        chat = (Button)view.findViewById(R.id.chat);
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("mobno", "11");
+                args.putString("name", "11");
+                args.putString("msg", "hello from 11");
+                Intent chat = new Intent(getActivity(), ChatActivity.class);
+                chat.putExtra("INFO", args);
+                NotificationCompat.Builder notification = new NotificationCompat.Builder(getActivity());
+                notification.setContentTitle("11");
+                notification.setContentText("hello from 11");
+                notification.setTicker("New Message !");
+                notification.setSmallIcon(R.drawable.ic_launcher);
+
+                PendingIntent contentIntent = PendingIntent.getActivity(getActivity(), 1000,
+                        chat, PendingIntent.FLAG_CANCEL_CURRENT);
+                notification.setContentIntent(contentIntent);
+                notification.setAutoCancel(true);
+                NotificationManager manager =(NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(0, notification.build());
+            }
+        });
+
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,8 +115,11 @@ public class UserFragment extends Fragment {
         @Override
         protected void onPostExecute(JSONArray json) {
             for(int i = 0; i < json.length(); i++){
-                JSONObject c = null;
+
                 try {
+                    JSONObject c = json.getJSONObject(1);
+
+                    Log.v("json", c.toString());
                     c = json.getJSONObject(i);
                     String name = c.getString("name");
                     String mobno = c.getString("mobno");
