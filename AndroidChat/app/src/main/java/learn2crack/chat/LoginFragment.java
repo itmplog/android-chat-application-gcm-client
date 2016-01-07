@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment {
             params.add(new BasicNameValuePair("mobno", mobno.getText().toString()));
             params.add((new BasicNameValuePair("reg_id",prefs.getString("REG_ID",""))));
 
-            JSONObject jObj = json.getJSONFromUrl("http://10.0.2.2:8080/login",params);
+            JSONObject jObj = json.getJSONFromUrl("http://itmp.top:1010/login",params);
             return jObj;
 
 

@@ -76,7 +76,7 @@ public class UserFragment extends Fragment {
             JSONParser json = new JSONParser();
             params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("mobno", prefs.getString("REG_FROM","")));
-            JSONArray jAry = json.getJSONArray("http://10.0.2.2:8080/getuser",params);
+            JSONArray jAry = json.getJSONArray("http://itmp.top:1010/getuser",params);
 
             return jAry;
         }
@@ -122,7 +122,7 @@ public class UserFragment extends Fragment {
             JSONParser json = new JSONParser();
             params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("mobno", prefs.getString("REG_FROM","")));
-            JSONObject jObj = json.getJSONFromUrl("http://10.0.2.2:8080/logout",params);
+            JSONObject jObj = json.getJSONFromUrl("http://itmp.top:1010/logout",params);
 
             return jObj;
         }
