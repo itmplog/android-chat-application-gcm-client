@@ -1,4 +1,4 @@
-package learn2crack.chat;
+package top.itmp.chat;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -117,9 +117,9 @@ public class UserFragment extends Fragment {
             for(int i = 0; i < json.length(); i++){
 
                 try {
-                    JSONObject c = json.getJSONObject(1);
+                    JSONObject c =  null;//son.optJSONObject(i);//json.getJSONObject(1);
 
-                    Log.v("json", c.toString());
+                   // Log.v("json", c.toString());
                     c = json.getJSONObject(i);
                     String name = c.getString("name");
                     String mobno = c.getString("mobno");

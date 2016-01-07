@@ -1,4 +1,4 @@
-package learn2crack.chat;
+package top.itmp.chat;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -33,6 +33,7 @@ public class ChatActivity extends Activity {
     SharedPreferences prefs;
     List<NameValuePair> params;
     EditText chat_msg;
+    String msg = null;
     Button send_btn;
     Bundle bundle;
     TableLayout tab;
@@ -44,7 +45,7 @@ public class ChatActivity extends Activity {
 
         prefs = getSharedPreferences("Chat", 0);
         bundle = getIntent().getBundleExtra("INFO");
-        SharedPreferences.Editor edit = prefs.edit();
+        final SharedPreferences.Editor edit = prefs.edit();
         edit.putString("CURRENT_ACTIVE", bundle.getString("mobno"));
         edit.commit();
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
@@ -69,13 +70,14 @@ public class ChatActivity extends Activity {
             @Override
             public void onClick(View v) {
                 TableRow tr2 = new TableRow(getApplicationContext());
-                tr2.setLayoutParams(new TableRow.LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tr2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 TextView textview = new TextView(getApplicationContext());
                 textview.setTextSize(20);
                 textview.setTextColor(Color.parseColor("#A901DB"));
                 textview.setText(Html.fromHtml("<b>You : </b>" + chat_msg.getText().toString()));
                 tr2.addView(textview);
                 tab.addView(tr2);
+                msg = chat_msg.getText().toString();
                 new Send().execute();
             }
         });
@@ -116,7 +118,7 @@ public class ChatActivity extends Activity {
             params.add(new BasicNameValuePair("from", prefs.getString("REG_FROM","")));
             params.add(new BasicNameValuePair("fromn", prefs.getString("FROM_NAME","")));
             params.add(new BasicNameValuePair("to", bundle.getString("mobno")));
-            params.add((new BasicNameValuePair("msg",chat_msg.getText().toString())));
+            params.add((new BasicNameValuePair("msg",msg)));
 
             JSONObject jObj = json.getJSONFromUrl("http://itmp.top:1010/send",params);
             return jObj;

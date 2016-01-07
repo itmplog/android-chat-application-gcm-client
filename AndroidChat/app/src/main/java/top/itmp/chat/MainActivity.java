@@ -1,4 +1,4 @@
-package learn2crack.chat;
+package top.itmp.chat;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
-    String SENDER_ID = "Your Project Number";
+    String SENDER_ID = "1061175746495";
 
 
     static final String TAG = "L2C";

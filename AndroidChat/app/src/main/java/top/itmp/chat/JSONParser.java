@@ -1,4 +1,4 @@
-package learn2crack.chat;
+package top.itmp.chat;
 
 
 import java.io.BufferedReader;
