@@ -114,6 +114,7 @@ public class UserFragment extends Fragment {
         }
         @Override
         protected void onPostExecute(JSONArray json) {
+            if(json != null)
             for(int i = 0; i < json.length(); i++){
 
                 try {

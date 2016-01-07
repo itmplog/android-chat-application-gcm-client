@@ -50,9 +50,9 @@ public class MSGService extends IntentService {
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 
-                if(!prefs.getString("CURRENT_ACTIVE","").equals(extras.getString("fromu"))) {
+                //if(!prefs.getString("CURRENT_ACTIVE","").equals(extras.getString("fromu"))) {
                     sendNotification(extras.getString("msg"), extras.getString("fromu"), extras.getString("name"));
-                }
+                //}
                 Log.i("TAG", "Received: " + extras.getString("msg"));
             }
         }
